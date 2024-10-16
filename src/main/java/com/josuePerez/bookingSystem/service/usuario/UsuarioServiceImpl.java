@@ -45,6 +45,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.save(existingUsuario);
     }
 
+
+
     @Override
     public void deleteById(String id) {
         usuarioRepository.deleteById(id);

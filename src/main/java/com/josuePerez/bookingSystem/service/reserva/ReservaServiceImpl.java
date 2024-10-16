@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class ReservaServiceImpl implements ReservaService {
+public class ReservaServiceImpl implements ReservaService{
 
     @Autowired
     private ReservaRepository reservaRepository;
@@ -32,8 +32,8 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public Reserva update(String id, Reserva reserva) {
-        Reserva existingReserva = reservaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Reserva no encontrada"));
-        if (reserva.getUsuarioId() != null) {
+        Reserva existingReserva = reservaRepository.findById(id).orElse(null);
+        if(reserva.getUsuarioId()!=null){
             existingReserva.setUsuarioId(reserva.getUsuarioId());
         }
         return reservaRepository.save(existingReserva);
