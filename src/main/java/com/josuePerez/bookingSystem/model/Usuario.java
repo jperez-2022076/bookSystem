@@ -1,5 +1,6 @@
 package com.josuePerez.bookingSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +14,7 @@ public class Usuario {
     private String id;
     private String nombre;
     private String email;
+    @JsonIgnore  //con esto en el mostarReserva no me muestra password
     private String password;
     private String telefono;
 

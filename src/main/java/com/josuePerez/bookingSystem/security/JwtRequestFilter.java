@@ -38,7 +38,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
-        // Continuar con el siguiente filtro
+
         chain.doFilter(request, response);
     }
     // Método para extraer el token del header

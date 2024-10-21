@@ -1,8 +1,10 @@
 package com.josuePerez.bookingSystem.controller.reserva;
 
+import com.josuePerez.bookingSystem.dto.ReservaResponseDto;
 import com.josuePerez.bookingSystem.model.Reserva;
 import com.josuePerez.bookingSystem.service.reserva.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,19 +21,39 @@ public class ReservaController {
         return reservaService.findAll();
     }
 
-    @GetMapping("/{idReserva}")
-    public Reserva findById(@PathVariable String idReserva){
-        return reservaService.findById(idReserva);
+    @GetMapping("/{id}")
+    public ResponseEntity<ReservaResponseDto> getReservaById(@PathVariable String id) {
+        try {
+            ReservaResponseDto reservaDto = reservaService.getReservaById(id);
+            return ResponseEntity.ok(reservaDto);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
+
 
     @PostMapping
-    public Reserva save(@RequestBody Reserva reserva){
-        return reservaService.save(reserva);
+    public ResponseEntity<Reserva> save(@RequestBody Reserva reserva) {
+        try {
+            // Intentar guardar la reserva
+            Reserva nuevaReserva = reservaService.save(reserva);
+            return ResponseEntity.ok(nuevaReserva);
+        } catch (IllegalArgumentException e) {
+            // Si el usuario no existe, devolver un 400 Bad Request con el mensaje de error
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
+
     @PutMapping("/{idReserva}")
-    public Reserva update(@PathVariable String idReserva, @RequestBody Reserva reserva){
-        return reservaService.update(idReserva, reserva);
+    public ResponseEntity<Reserva> update(@PathVariable String idReserva, @RequestBody Reserva reserva){
+        try {
+            Reserva actualizarReserva=reservaService.update(idReserva, reserva);
+            return ResponseEntity.ok(actualizarReserva);
+        }catch(IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(null);
+        }
+
     }
 
     @DeleteMapping("{idReserva}")

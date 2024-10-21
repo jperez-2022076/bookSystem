@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil {
 
-    private static final String SECRET_KEY_STRING = "mi_clave_secreta_larga_y_seguraxsssss"; // Cambia esto por tu clave
+    private static final String SECRET_KEY_STRING = "mi_clave_secreta_larga_y_seguraxsssss";
     private static final Key SECRET_KEY = new SecretKeySpec(SECRET_KEY_STRING.getBytes(), SignatureAlgorithm.HS256.getJcaName());
 
     // Generar JWT
